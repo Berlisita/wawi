@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¡Sonríe, mi amor! 💓</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 50%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+      padding: 20px;
+      color: #fff;
+    }
+
+    /* Lluvia de corazones de fondo */
+    .heart-bg {
+      position: fixed;
+      top: -10vh;
+      font-size: 1.5rem;
+      animation: fall 5s linear infinite;
+      z-index: 0;
+      opacity: 0.7;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+      }
+    }
+
+    /* Tarjeta Principal */
+    .card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 25px;
+      padding: 30px;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      z-index: 10;
+      animation: popIn 0.8s ease-out;
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      font-weight: 300;
+    }
+
+    /* Animación del osito/emoji */
+    .avatar {
+      font-size: 5rem;
+      margin: 15px 0;
+      display: inline-block;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px) rotate(5deg); }
+    }
+
+    /* Caja de mensajes de aliento */
+    .message-box {
+      background: rgba(255, 255, 255, 0.9);
+      color: #333;
+      padding: 20px;
+      border-radius: 15px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      min-height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 20px 0;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+
+    /* Botones vibrantes */
+    .btn-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    button {
+      background: #ff3366;
+      color: white;
+      border: none;
+      padding: 14px 20px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(255, 51, 102, 0.4);
+    }
+
+    button:hover {
+      background: #ff0044;
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 20px rgba(255, 51, 102, 0.6);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    .btn-secondary {
+      background: #00d2ff;
+      box-shadow: 0 5px 15px rgba(0, 210, 255, 0.4);
+    }
+
+    .btn-secondary:hover {
+      background: #00a8cc;
+      box-shadow: 0 8px 20px rgba(0, 210, 255, 0.6);
+    }
+
+    .footer-note {
+      margin-top: 20px;
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>¡Hola, mi niña hermosa! ✨</h1>
+    <p class="subtitle">Sé que hoy no ha sido el mejor día, pero vine a recordarte algo...</p>
+    
+    <div class="avatar" id="avatar">🐧</div>
+
+    <div class="message-box" id="message">
+      Haz clic en los botones de abajo para activar tu dosis de amor y sonrisas. 👇
+    </div>
+
+    <div class="btn-container">
+      <button onclick="nuevoMensaje()">💌 Dame una razón para sonreír</button>
+      <button class="btn-secondary" onclick="abrazote()">🤗 Solicitar un abrazo virtual gigante</button>
+    </div>
+
+    <p class="footer-note">Hecho con el 100% de mi corazón para ti. 💓</p>
+  </div>
+
+  <script>
+    // Frases románticas, divertidas y de aliento
+    const mensajes = [
+      "Si los días grises fueran examen, tú serías la única persona que saca 10/10. 😻",
+      "Recordatorio oficial: Eres la persona más fuerte, inteligente y hermosa que conozco. Este mal momento no te define. 🥺",
+      "Que no se te olvide que hasta las estrellas necesitan oscuridad para brillar. ¡Tú vas a superar esto! 🌟",
+      "Alerta del sistema: Se ha detectado una novia demasiado increíble para estar triste. Iniciando protocolo de mimos... 😝",
+      "No hay día tan malo que un ratito juntas no pueda arreglar. ¡Estoy contigo siempre! 🤝💓",
+      "¿Sabías que cuando sonríes el mundo se vuelve 100% más bonito? Tienes la sonrisa más linda... 😉✨"
+    ];
+
+    const emojis = ["🐧", "🐣", "🌸", "👑", "💓", "🍦", "✨"];
+
+    function nuevoMensaje() {
+      const msgBox = document.getElementById('message');
+      const avatarBox = document.getElementById('avatar');
+      
+      // Animación rápida al cambiar
+      msgBox.style.transform = "scale(0.95)";
+      
+      setTimeout(() => {
+        const randomMsg = mensajes[Math.floor(Math.random() * mensajes.length)];
+        const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+        
+        msgBox.innerText = randomMsg;
+        avatarBox.innerText = randomEmoji;
+        msgBox.style.transform = "scale(1)";
+      }, 150);
+    }
+
+    function abrazote() {
+      const msgBox = document.getElementById('message');
+      const avatarBox = document.getElementById('avatar');
+      
+      avatarBox.innerText = "🫂";
+      msgBox.innerText = "¡ABRAZO VIRTUAL DE OSO ENVIADO! Te amo muchísimo amor, todo va a estar bien. 💓";
+    }
+
+    // Generar corazones flotantes de fondo
+    function createHearts() {
+      const heartCount = 15;
+      for (let i = 0; i < heartCount; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart-bg');
+        heart.innerText = ['💓', '✨', '🌸', '🐧', '⭐'][Math.floor(Math.random() * 5)];
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        heart.style.animationDelay = Math.random() * 5 + 's';
+        document.body.appendChild(heart);
+      }
+    }
+
+    createHearts();
+  </script>
+</body>
+</html>
